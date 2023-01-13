@@ -1,0 +1,28 @@
+mailcheck_nouser_back/.env
+mailcheck_nouser_back/db/
+mailcheck_nouser_back/pgadmin
+mailcheck_nouser_back/api/app/migration
+
+
+# dependencies
+mailcheck_nouser_front/node_modules
+mailcheck_nouser_front/.pnp
+mailcheck_nouser_front/.pnp.js
+
+# testing
+mailcheck_nouser_front/coverage
+
+# production
+mailcheck_nouser_front/build
+
+# misc
+mailcheck_nouser_front/.DS_Store
+mailcheck_nouser_front/.env.local
+mailcheck_nouser_front/.env.development.local
+mailcheck_nouser_front/.env.test.local
+mailcheck_nouser_front/.env.production.local
+
+mailcheck_nouser_front/npm-debug.log*
+mailcheck_nouser_front/yarn-debug.log*
+mailcheck_nouser_front/yarn-error.log*
+
