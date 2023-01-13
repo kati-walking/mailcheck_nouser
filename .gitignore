@@ -26,3 +26,4 @@ mailcheck_nouser_front/npm-debug.log*
 mailcheck_nouser_front/yarn-debug.log*
 mailcheck_nouser_front/yarn-error.log*
 
+mailcheck_nouser_front/package-lock.json
