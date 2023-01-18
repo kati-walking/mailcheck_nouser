@@ -3,7 +3,13 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import jaLocale from '@fullcalendar/core/locales/ja';
+import useNavigate from 'react-router-dom';
+
 export default function Calendar(props:any){
+    const navigate = useNavigate();
+    const handleDateClick = useCallback((arg:DateClickArg)=>{
+        navigate('/Maillists/'+arg.Date);
+    },[])
     return(
         <div>
             <FullCalendar 
@@ -17,6 +23,7 @@ export default function Calendar(props:any){
                     right:'dayGridMonth,timeGridWeek',
                 }}
                 events={props.events}
+                dateClick={handleDateClick}
             />
         </div>
     )
