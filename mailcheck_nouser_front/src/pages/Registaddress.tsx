@@ -46,7 +46,7 @@ export default function RegistAdress(){
                     const {data,status}=res;
                     console.log(res.data);
                     console.log(res.status);
-                    navigate('/UserPage')
+                    navigate('/Userpage')
                 })
             //console.log("poyopoyo");
         } catch (error) {
