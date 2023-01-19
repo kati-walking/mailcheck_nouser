@@ -1,9 +1,21 @@
-import React from 'react'
+import axios from 'axios'
+import React, { useState,useEffect} from 'react'
+import { useParams } from 'react-router-dom'
+import MailTable from '../components/MailTable'
+import { Mails } from '../types/Mails'
 export default function Maillists(){
-    
+    const [Mails,setMails] = useState<Mails>({Mails:[]})
+    const params=useParams();
+    const url = "http://localhost:3000";
+    useEffect(()=>{
+        axios.get(url+'/Mails/'+params.date).then((res)=>{
+            setMails(res.data)
+        })
+    },[params.date])
+
     return(
         <div>
-            hello world
+            <MailTable data={Mails.Mails}/>
         </div>
     )
 }

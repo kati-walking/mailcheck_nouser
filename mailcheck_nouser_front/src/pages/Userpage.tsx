@@ -15,7 +15,7 @@ export default function Userpage(){
         axios.get(url+"MaildetailsperDay").then((res)=>{
             setMaildetails(res.data);
         })
-    })
+    },[])
 
     return(
         <div>

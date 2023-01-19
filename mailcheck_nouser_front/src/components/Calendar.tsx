@@ -10,7 +10,7 @@ export default function Calendar(props:any){
     const navigate = useNavigate();
     const handleDateClick = useCallback((arg:DateClickArg)=>{
         navigate('/Maillists/'+arg.date);
-    },[])
+    },[navigate])
     return(
         <div>
             <FullCalendar 
