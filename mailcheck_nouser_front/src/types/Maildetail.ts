@@ -1,4 +1,4 @@
-export type Mailnumber ={
+export type Maildetail ={
     title:string;
     start:Date
 }
