@@ -3,7 +3,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -11,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link} from 'react-router-dom';
 import axios, {AxiosRequestConfig, AxiosResponse,AxiosError} from 'axios';
 
 
@@ -28,31 +27,7 @@ export default function RegistAdress(){
             Token: data.get('Token'),
         });
         const url = "http://localhost:3000";
-
-        try {
-            const options:AxiosRequestConfig ={
-                url:"http://localhost:3000/RegistAdress",
-                method:"GET",
-                params:{
-                    email:data.get('email'),
-                    Token:data.get('Token')
-                }
-            };
-            axios(options)
-                .then((res: AxiosResponse<{
-                    email:string,
-                    Token:string
-                }>) =>{
-                    const {data,status}=res;
-                    console.log(res.data);
-                    console.log(res.status);
-                    navigate('/Userpage')
-                })
-            //console.log("poyopoyo");
-        } catch (error) {
-            alert("adress or password are wrong")
-            console.log(error)
-        }
+        axios.post(url+'/RegistAdress',{email:data.get('email'),Token:data.get('Token')})
     };
     return(
         <ThemeProvider theme={theme}>
@@ -104,7 +79,7 @@ export default function RegistAdress(){
                     </Box>
                     <Grid container justifyContent="flex-start">
                         <Grid item>
-                            <Link href="#" variant="body2" onClick={()=>navigate('/UserPage')}>
+                            <Link to={'/Userpage'} >
                                     return UserPage
                             </Link>
                         </Grid>

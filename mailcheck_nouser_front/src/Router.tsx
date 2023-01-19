@@ -9,7 +9,7 @@ export default function Router(){
         <BrowserRouter>
             <Routes>
                 <Route path = "/Userpage" element = {<Userpage />} />
-                <Route path = "/Regist" element={<RegistAdress />} />
+                <Route path = "/Registadress" element={<RegistAdress />} />
                 <Route path = "/Maillists/:date" element = {<Maillists />} />
             </Routes>
         </BrowserRouter>
