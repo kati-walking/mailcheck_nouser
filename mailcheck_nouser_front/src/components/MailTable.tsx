@@ -32,7 +32,7 @@ export default function MailTable(props:any) {
                   {data.from}
                 </TableCell>
                 <TableCell align="right">{data.subject}</TableCell>
-                <TableCell align="right">{data.date.toString().substring(0,10)}</TableCell>
+                {/* <TableCell align="right">{data.date.toString().substring(0,10)}</TableCell> */}
               </TableRow>
             ))}
           </TableBody>

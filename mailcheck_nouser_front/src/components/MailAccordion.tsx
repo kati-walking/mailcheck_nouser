@@ -19,8 +19,9 @@ export default function MailAccordion(props:any){
                         aria-controls = "panel1a-content"
                         id= {data.id.toString()}
                     >
-                        <Typography>data.subject</Typography>
-                        <button type="button" onClick={()=>{
+                        <Typography>{data.subject}</Typography>
+                        <button type="button" 
+                        onClick={()=>{
                             axios.post(url+"/hide",{id:data.id})
                             }
                         }>delete</button>
