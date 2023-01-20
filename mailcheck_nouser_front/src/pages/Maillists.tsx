@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useState,useEffect} from 'react'
 import { useParams } from 'react-router-dom'
+import MailAccordion from '../components/MailAccordion'
 import MailTable from '../components/MailTable'
 import { Mails } from '../types/Mails'
 export default function Maillists(){
@@ -15,7 +16,8 @@ export default function Maillists(){
 
     return(
         <div>
-            <MailTable data={Mails.Mails}/>
+            {/* <MailTable data={Mails}/> */}
+            <MailAccordion data={Mails}/>
         </div>
     )
 }

@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Mail } from '../types/Mail';
+import { Mails } from '../types/Mails';
 
 
 
@@ -22,7 +23,7 @@ export default function MailTable(props:any) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.map((data:Mail) => (
+            {props.data.Mails.map((data:Mail) => (
               <TableRow
                 key={data.from}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
