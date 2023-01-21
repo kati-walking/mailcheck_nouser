@@ -1,4 +1,4 @@
-from sqlalchemy import Column,Integer,String,ForeignKey,DATETIME
+from sqlalchemy import Column,Integer,String,ForeignKey
 from database import Base
 from datetime import datetime
 class Mail(Base):
@@ -7,7 +7,7 @@ class Mail(Base):
     mailbox_id=Column(Integer,ForeignKey('mailbox.id'))
     From = Column(String(128),nullable=False)
     Subject = Column(String(128),nullable=False)
-    Body = Column(String(4000))
+    Body = Column(String(8000))
 
     def __init__(self,mailbox_id:int,From:str,Subjext:str,Body:str):
         self.mailbox_id=mailbox_id

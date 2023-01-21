@@ -2,7 +2,7 @@ from sqlalchemy import Column,Integer,String,DATETIME,ForeignKey
 from database import Base
 from datetime import datetime
 class MailDate(Base):
-    __tabkename__='maildate'
+    __tablename__='maildate'
     id = Column(Integer,primary_key=True,index=True)
     mail_id = Column(Integer,ForeignKey('mail.id'))
     Date = Column(DATETIME)

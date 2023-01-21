@@ -8,3 +8,4 @@ pyOpenSSL
 pyzmail36
 datetime
 imapclient
+psycopg2

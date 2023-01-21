@@ -17,7 +17,7 @@ services:
   db: 
     image: postgres:15
     ports:
-      - 3306:3306
+      - 5432:5432
     environment:
       POSTGRES_USER: backend
       POSTGRES_PASSWORD: docker
