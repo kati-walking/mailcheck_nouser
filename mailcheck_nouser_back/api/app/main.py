@@ -22,7 +22,7 @@ from mailcheck import Get_Mails
 
 app = FastAPI()
 origins =[
-    "http://localhost:*",
+    "*",
 ]
 app.add_middleware(
     CORSMiddleware,
@@ -60,6 +60,17 @@ def get_mails(
 ):
     print(date)
     Mails=[]
+    db_mails=db.query(models.mail.Mail)\
+        .join(models.maildate.MailDate,models.mail.Mail.id==models.maildate.MailDate.mail_id)\
+            .filter(models.maildate.MailDate.Date==date)\
+                .all()
+    for mail in db_mails:
+        Mails.append({
+            "id":mail.id,
+            "From":mail.From,
+            "Subject":mail.Subject,
+            "Body":mail.Body,
+        })
     return Mails
 
 

@@ -12,26 +12,12 @@ export default function Maillists(){
     useEffect(()=>{
         console.log(params)
         axios.get(url+'/Mails/'+params.date).then((res)=>{
-            setMails(res.data)
+            setMails({Mails:res.data})
+            //console.log("mails:")
+            //console.log(Mails)
         })
-    },[params]);
 
-    // const Mails={
-    //     Mails:[
-    //         {
-    //             id:1,
-    //             from:"kati",
-    //             subject:"test",
-    //             body:"test"
-    //         },
-    //         {
-    //             id:2,
-    //             from:"haro",
-    //             subject:"test2",
-    //             body:"poyo"
-    //         }
-    //     ]
-    // }
+    },[]);
     return(
         <div>
             {/* <MailTable data={Mails}/> */}

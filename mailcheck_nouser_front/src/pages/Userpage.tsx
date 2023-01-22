@@ -12,15 +12,18 @@ export default function Userpage(){
     const url = "http://localhost:3000";
     const [Maildetails,setMaildetails] = useState<Maildetails>({Maildetails:[]});
     useEffect(()=>{
+        //console.log("get/events")
         axios.get(url+"/Events").then((res)=>{
             setMaildetails(res.data);
         })
+        console.log(Maildetails)
     },[])
 
     return(
         <div>
             <Link to={'/Registadress'}>RegistAdress</Link>
-            <Calendar events={Maildetails.Maildetails} />
+            <Calendar events={Maildetails} />
+           
         </div>
     )
 }
