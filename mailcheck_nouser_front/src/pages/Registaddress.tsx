@@ -27,7 +27,7 @@ export default function RegistAdress(){
             Token: data.get('Token'),
         });
         const url = "http://localhost:3000";
-        axios.post(url+'/RegistAdress',{email:data.get('email'),Token:data.get('Token')})
+        axios.post(url+'/mailbox',{mailadress:data.get('email'),token:data.get('Token')})
     };
     return(
         <ThemeProvider theme={theme}>

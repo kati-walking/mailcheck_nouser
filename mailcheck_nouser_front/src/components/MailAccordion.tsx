@@ -10,6 +10,7 @@ import axios from "axios";
 
 export default function MailAccordion(props:any){
     const url = "http://localhost:3000";
+    console.log(props.data);
     return(
         <div>
             {props.data.Mails.map((data:Mail)=>(

@@ -7,9 +7,25 @@ import interactionPlugin,{DateClickArg} from '@fullcalendar/interaction'
 import {useNavigate} from 'react-router-dom';
 
 export default function Calendar(props:any){
+    const getStringFromDate=(date:Date):string=>{
+        const year_str = date.getFullYear();
+        //月だけ+1すること
+        const month_str = 1 + date.getMonth();
+        const day_str = date.getDate();
+        
+        let format_str = 'YYYY-MM-DD hh:mm:ss';
+        format_str = format_str.replace(/YYYY/g, year_str.toString());
+        format_str = format_str.replace(/MM/g, month_str.toString());
+        format_str = format_str.replace(/DD/g, day_str.toString());
+        format_str = format_str.replace(/hh/g, "00");
+        format_str = format_str.replace(/mm/g, "00");
+        format_str = format_str.replace(/ss/g, "00");
+        return format_str;
+    };
     const navigate = useNavigate();
     const handleDateClick = useCallback((arg:DateClickArg)=>{
-        navigate('/Maillists/'+arg.date);
+        const formatdate = getStringFromDate(arg.date)
+        navigate('/Maillists/'+formatdate);
     },[])
     return(
         <div>

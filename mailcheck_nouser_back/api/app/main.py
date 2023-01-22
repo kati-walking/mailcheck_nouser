@@ -1,9 +1,9 @@
+import os
 from schemas.Mailbox import Mailbox
-from fastapi import FastAPI,Depends,status,HTTPException
-from fastapi.responses import JSONResponse,PlainTextResponse
+from schemas.Event import Event
+from schemas.Mail import Mail
+from fastapi import FastAPI,Depends,HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.exceptions import HTTPException as StarletteHTTPException
-from pydantic import BaseModel
 from datetime import datetime
 
 from typing import List
@@ -12,26 +12,56 @@ import database
 import models.mail
 import models.mailbox
 import models.maildate
-from sqlalchemy import desc,func
 from sqlalchemy.orm import session
 
-import unicodedata
-import imapclient
-from backports import ssl
-from OpenSSL import SSL
 from datetime import date, datetime, timedelta
-import pyzmail
 import re
 
-import json
 
 from mailcheck import Get_Mails
 
 app = FastAPI()
+origins =[
+    "http://localhost:*",
+]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
 
 @app.get("/")
 def read_root():
-    return("hello world")
+    return(os.environ['DB_USER'])
+
+
+@app.get("/Events",response_model=List[Event])
+def get_events(
+    db:session=Depends(database.get_db)
+):
+    db_events = db.query(models.mailbox.Mailbox,models.mail.Mail.Subject,models.maildate.MailDate.Date)\
+        .join(models.mail.Mail,models.mailbox.Mailbox.id==models.mail.Mail.mailbox_id)\
+            .join(models.maildate.MailDate,models.mail.Mail.id==models.maildate.MailDate.mail_id)\
+                .all()
+    events=[]
+    for event in db_events:
+        events.append({
+            "title":event.Subject,
+            "start":event.Date
+        })
+    return events
+
+@app.get("/Mails/{date}",response_model=List[Mail])
+def get_mails(
+    date:datetime,
+    db:session=Depends(database.get_db)
+):
+    print(date)
+    Mails=[]
+    return Mails
+
 
 @app.post("/mailbox")
 def create_mailbox(
@@ -77,7 +107,7 @@ def create_mailbox(
             mails_hasDate.append(mail)
     #print(len(mails_hasDate))
 
-    mails_withDate = []
+
     for mail in mails_hasDate:
         #print(mail)
         datelist = re.findall(seiki,mail[BODY])
@@ -107,4 +137,4 @@ def create_mailbox(
             db.commit()
     db.commit()
     
-    return(new_mailbox)
+    return()

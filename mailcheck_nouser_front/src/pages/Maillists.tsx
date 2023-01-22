@@ -8,11 +8,14 @@ export default function Maillists(){
     const [Mails,setMails] = useState<Mails>({Mails:[]})
     const params=useParams();
     const url = "http://localhost:3000";
+
     useEffect(()=>{
+        console.log(params)
         axios.get(url+'/Mails/'+params.date).then((res)=>{
             setMails(res.data)
         })
-    },[params.date])
+    },[params]);
+
     // const Mails={
     //     Mails:[
     //         {

@@ -12,7 +12,7 @@ export default function Userpage(){
     const url = "http://localhost:3000";
     const [Maildetails,setMaildetails] = useState<Maildetails>({Maildetails:[]});
     useEffect(()=>{
-        axios.get(url+"MaildetailsperDay").then((res)=>{
+        axios.get(url+"/Events").then((res)=>{
             setMaildetails(res.data);
         })
     },[])
