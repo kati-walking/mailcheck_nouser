@@ -34,10 +34,18 @@ export default function Calendar(props:any){
                 initialView="dayGridMonth"
                 locales={[jaLocale]}
                 locale='ja'
+                contentHeight={'auto'}
+                // dayMaxEventRows={5}
                 headerToolbar={{
                     left:'prev,next today',
                     center:'title',
                     right:'dayGridMonth,timeGridWeek',
+                }}
+                views={{
+                    timeGridWeek: {
+                    slotMinTime: '00:00:00',
+                    slotMaxTime: '00:00:00'
+                  }
                 }}
                 events={props.events}
                 dateClick={handleDateClick}

@@ -1,3 +1,4 @@
+import { Button } from '@mui/material'
 import axios from 'axios'
 import React, { useState,useEffect} from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -5,14 +6,14 @@ import MailAccordion from '../components/MailAccordion'
 import MailTable from '../components/MailTable'
 import { Mails } from '../types/Mails'
 export default function Maillists(){
-    const [Mails,setMails] = useState<Mails>({Mails:[]})
+    const [Mails,setMails] = useState<Mails>({mails:[]})
     const params=useParams();
     const url = "http://localhost:3000";
 
     useEffect(()=>{
         console.log(params)
         axios.get(url+'/Mails/'+params.date).then((res)=>{
-            setMails({Mails:res.data})
+            setMails({mails:res.data})
             //console.log("mails:")
             //console.log(Mails)
         })
@@ -22,7 +23,10 @@ export default function Maillists(){
         <div>
             {/* <MailTable data={Mails}/> */}
             <MailAccordion data={Mails}/>
-            <Link to ={'/Userpage'}>Return UserPage</Link>
+            {/* <Link to ={'/Userpage'}>Return UserPage</Link> */}
+            <Button variant='contained' component = {Link} to={'/Userpage'}>
+                Return UserPage
+            </Button>
         </div>
     )
 }

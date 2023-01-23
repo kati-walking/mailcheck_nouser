@@ -5,6 +5,7 @@ import { Maildetails} from '../types/Maildetails';
 
 import axios, {AxiosRequestConfig, AxiosResponse,AxiosError} from 'axios';
 import { Link } from 'react-router-dom';
+import { Button } from '@mui/material';
 
 export default function Userpage(){
     //const events_list=[{title:'hoge',start:"2023-01-18"},{title:'huga',start:"2023-01-19"}]
@@ -21,9 +22,10 @@ export default function Userpage(){
 
     return(
         <div>
-            <Link to={'/Registadress'}>RegistAdress</Link>
+            <Button variant='contained' component = {Link} to={'/Registadress'}>
+                RegistAdress
+            </Button>
             <Calendar events={Maildetails} />
-           
         </div>
     )
 }

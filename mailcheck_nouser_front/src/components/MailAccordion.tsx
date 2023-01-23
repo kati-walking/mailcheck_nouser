@@ -7,28 +7,40 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Mail } from "../types/Mail";
 import { Mails } from "../types/Mails";
 import axios from "axios";
+import { Button } from "@mui/material";
+import { useState } from "react";
 
-export default function MailAccordion(props:any){
+export default function MailAccordion(props:{data:Mails}){
+    const [disable,setDisable]=useState(false);
     const url = "http://localhost:3000";
     console.log(props.data);
+    const formatString=(s:string)=>{
+        //const str=s.replace(/\r?\n/g, '<br>')
+        const str = s;
+        //console.log(str)
+        return str 
+    }
     return(
         <div>
-            {props.data.Mails.map((data:Mail)=>(
-                <Accordion>
+            {props.data.mails.map((data:Mail)=>(
+                <Accordion disabled={disable}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls = "panel1a-content"
                         id= {data.id.toString()}
                     >
                         <Typography>{data.subject}</Typography>
-                        <button type="button" 
+                        <div style={{ flexGrow: 1 }}></div>
+                        <Button type="button" 
                         onClick={()=>{
-                            axios.post(url+"/hide",{id:data.id})
+                            console.log(data.id)
+                            axios.post(url+"/delete",null,{params:{id:data.id}})
+                            setDisable(true);
                             }
-                        }>delete</button>
+                        }>delete</Button>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <Typography>{data.body}</Typography>
+                        <pre>{formatString(data.body)}</pre>
                     </AccordionDetails>
                 </Accordion>
             ))}

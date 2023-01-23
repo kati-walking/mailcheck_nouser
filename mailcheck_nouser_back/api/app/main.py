@@ -13,6 +13,7 @@ import models.mail
 import models.mailbox
 import models.maildate
 from sqlalchemy.orm import session
+from sqlalchemy import or_
 
 from datetime import date, datetime, timedelta
 import re
@@ -44,16 +45,18 @@ def get_events(
     db_events = db.query(models.mailbox.Mailbox,models.mail.Mail.Subject,models.maildate.MailDate.Date)\
         .join(models.mail.Mail,models.mailbox.Mailbox.id==models.mail.Mail.mailbox_id)\
             .join(models.maildate.MailDate,models.mail.Mail.id==models.maildate.MailDate.mail_id)\
-                .all()
+                .filter(or_(models.mail.Mail.isView==None,models.mail.Mail.isView==True))\
+                    .all()
     events=[]
     for event in db_events:
         events.append({
             "title":event.Subject,
-            "start":event.Date
+            "start":event.Date,
+            "allDay":True
         })
     return events
 
-@app.get("/Mails/{date}",response_model=List[Mail])
+@app.get("/Mails/{date}")
 def get_mails(
     date:datetime,
     db:session=Depends(database.get_db)
@@ -67,9 +70,9 @@ def get_mails(
     for mail in db_mails:
         Mails.append({
             "id":mail.id,
-            "From":mail.From,
-            "Subject":mail.Subject,
-            "Body":mail.Body,
+            "from":mail.From,
+            "subject":mail.Subject,
+            "body":mail.Body,
         })
     return Mails
 
@@ -149,3 +152,21 @@ def create_mailbox(
     db.commit()
     
     return()
+
+@app.get("/mail")
+def delete_mail(
+    id:int,
+    db:session=Depends(database.get_db)
+):
+    delete_mail=db.query(models.mail.Mail).filter(models.mail.Mail.id==id).first()
+    return(delete_mail)
+
+@app.post("/delete")
+def delete_mail(
+    id:int,
+    db:session=Depends(database.get_db)
+):
+    delete_mail=db.query(models.mail.Mail).filter(models.mail.Mail.id==id).first()
+    delete_mail.isView=False
+    db.commit()
+    return(delete_mail)
