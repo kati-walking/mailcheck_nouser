@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -6,7 +6,6 @@ import jaLocale from '@fullcalendar/core/locales/ja';
 import interactionPlugin,{DateClickArg} from '@fullcalendar/interaction'
 import {useNavigate} from 'react-router-dom';
 import { Events } from '../types/Events';
-import { Maildetails } from '../types/Maildetails';
 
 export default function Calendar(props:{events:Events}){
     const getStringFromDate=(date:Date):string=>{

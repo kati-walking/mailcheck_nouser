@@ -154,7 +154,7 @@ def create_mailbox(
     return()
 
 @app.get("/mail")
-def delete_mail(
+def get_mail(
     id:int,
     db:session=Depends(database.get_db)
 ):
@@ -172,7 +172,7 @@ def delete_mail(
     return(delete_mail)
 
 @app.post("/visible")
-def visinle(
+def visible(
     db:session=Depends(database.get_db)
 ):
     mails = db.query(models.mail.Mail).all()
