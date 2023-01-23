@@ -11,14 +11,12 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { useNavigate,Link} from 'react-router-dom';
-import axios, {AxiosRequestConfig, AxiosResponse,AxiosError} from 'axios';
+import axios from 'axios';
 
 
 const theme = createTheme({});
 
 export default function RegistAdress(){
-    const navigate = useNavigate();
-    
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);

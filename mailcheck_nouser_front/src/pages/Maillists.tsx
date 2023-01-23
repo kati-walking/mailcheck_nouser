@@ -1,9 +1,8 @@
 import { Button } from '@mui/material'
 import axios from 'axios'
-import React, { useState,useEffect} from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useState,useEffect} from 'react'
+import { Link, useParams } from 'react-router-dom'
 import MailAccordion from '../components/MailAccordion'
-import MailTable from '../components/MailTable'
 import { Mails } from '../types/Mails'
 export default function Maillists(){
     const [Mails,setMails] = useState<Mails>({mails:[]})

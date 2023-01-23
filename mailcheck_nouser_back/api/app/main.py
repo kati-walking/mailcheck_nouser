@@ -45,7 +45,7 @@ def get_events(
     db_events = db.query(models.mailbox.Mailbox,models.mail.Mail.Subject,models.maildate.MailDate.Date)\
         .join(models.mail.Mail,models.mailbox.Mailbox.id==models.mail.Mail.mailbox_id)\
             .join(models.maildate.MailDate,models.mail.Mail.id==models.maildate.MailDate.mail_id)\
-                .filter(or_(models.mail.Mail.isView==None,models.mail.Mail.isView==True))\
+                .filter(models.mail.Mail.isView==True)\
                     .all()
     events=[]
     for event in db_events:
@@ -170,3 +170,12 @@ def delete_mail(
     delete_mail.isView=False
     db.commit()
     return(delete_mail)
+
+@app.post("/visible")
+def visinle(
+    db:session=Depends(database.get_db)
+):
+    mails = db.query(models.mail.Mail).all()
+    for mail in mails:
+        mail.isView=True
+    db.commit()

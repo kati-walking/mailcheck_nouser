@@ -5,8 +5,10 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import jaLocale from '@fullcalendar/core/locales/ja';
 import interactionPlugin,{DateClickArg} from '@fullcalendar/interaction'
 import {useNavigate} from 'react-router-dom';
+import { Events } from '../types/Events';
+import { Maildetails } from '../types/Maildetails';
 
-export default function Calendar(props:any){
+export default function Calendar(props:{events:Events}){
     const getStringFromDate=(date:Date):string=>{
         const year_str = date.getFullYear();
         //月だけ+1すること
@@ -27,6 +29,7 @@ export default function Calendar(props:any){
         const formatdate = getStringFromDate(arg.date)
         navigate('/Maillists/'+formatdate);
     },[])
+    console.log(props.events)
     return(
         <div>
             <FullCalendar 

@@ -1,4 +1,5 @@
 export type Maildetail ={
     title:string;
-    start:Date
+    start:string;
+    allDay:boolean
 }

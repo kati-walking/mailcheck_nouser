@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Calendar from '../components/Calendar';
 import { Maildetails} from '../types/Maildetails';
 
-import axios, {AxiosRequestConfig, AxiosResponse,AxiosError} from 'axios';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { Events } from '../types/Events';
 
 export default function Userpage(){
     //const events_list=[{title:'hoge',start:"2023-01-18"},{title:'huga',start:"2023-01-19"}]
 
     const url = "http://localhost:3000";
-    const [Maildetails,setMaildetails] = useState<Maildetails>({Maildetails:[]});
+    const [events,setEvents] = useState<Events>({events:[]});
     useEffect(()=>{
         //console.log("get/events")
         axios.get(url+"/Events").then((res)=>{
-            setMaildetails(res.data);
+            //console.log(res.data)
+            setEvents(res.data);
         })
-        console.log(Maildetails)
+        console.log(events)
     },[])
 
     return(
@@ -25,7 +27,7 @@ export default function Userpage(){
             <Button variant='contained' component = {Link} to={'/Registadress'}>
                 RegistAdress
             </Button>
-            <Calendar events={Maildetails} />
+            <Calendar events={events} />
         </div>
     )
 }
